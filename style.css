@@ -1,0 +1,477 @@
+/* Importação de fontes fofas do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Handlee&family=Indie+Flower&display=swap');
+
+body {
+    font-family: 'Handlee', cursive, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #e6d8c8; /* Fundo mais suave e puxado para o sépia/marrom claro para nostalgia */
+    color: #4a3e35; /* Cor de texto mais escura e suave, como tinta antiga */
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-y: auto;
+    position: relative; /* Necessário para posicionar o heart-container */
+    overflow-x: hidden; /* Evita barra de rolagem horizontal devido aos corações */
+}
+
+/* NOVO: Contêiner para os corações flutuantes */
+#heart-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Permite clicar nos elementos por trás dos corações */
+    z-index: -1; /* Fica no background */
+    overflow: hidden; /* Garante que os corações desapareçam ao sair da tela */
+}
+
+.falling-heart {
+    position: absolute;
+    font-size: 2.5em; /* Tamanho dos emojis */
+    opacity: 0.8;
+    animation: fall linear infinite;
+    animation-duration: 8s; /* Duração da animação */
+    animation-delay: 0s; /* Começa imediatamente, mas será ajustado pelo JS */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Pequena sombra para destaque */
+    will-change: transform, opacity; /* Otimização para animação */
+    animation-timing-function: ease-in-out; /* *** ALTERADO AQUI ***: Para uma queda mais suave */
+}
+
+/* Animação de queda dos corações */
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) scale(0.5); /* Começa acima da tela, pequeno */
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateY(0vh) scale(1); /* Ganha opacidade e tamanho ao entrar */
+    }
+    90% {
+        opacity: 0.8;
+        transform: translateY(90vh) scale(1); /* Desce mantendo opacidade e tamanho */
+    }
+    100% {
+        transform: translateY(110vh) scale(0.5); /* Termina abaixo da tela, diminuindo e desaparecendo */
+        opacity: 0;
+    }
+}
+
+
+/* Regra CRÍTICA: Garante que elementos com a classe 'hidden' não sejam exibidos */
+.hidden {
+    display: none !important;
+}
+
+/* Estilo de cartão de papel para telas principais */
+.paper-card {
+    background: #fcf6eb; /* Cor de papel off-white com toque mais quente */
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 550px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #cdb898; /* Borda sutil, mais sépia */
+}
+
+#access-screen {
+    text-align: center;
+}
+
+#access-screen h1 {
+    font-family: 'Gochi Hand', cursive;
+    color: #7d5a6b; /* Rosa queimado/vinho mais suave, nostálgico */
+    font-size: 2.8em;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+}
+
+#access-screen p {
+    color: #6a5a51;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+#access-code-input {
+    width: calc(100% - 40px);
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 1px solid #c2a893; /* Borda mais suave, envelhecida */
+    border-radius: 8px;
+    font-size: 1.3em;
+    text-align: center;
+    background-color: #faefdb; /* Fundo claro para input */
+    color: #4a3e35;
+}
+
+#access-screen button {
+    background-color: #8f6c7c; /* Tom de rosa/vinho mais acinzentado */
+    width: 80%;
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+#access-screen button:hover {
+    background-color: #7d5a6b;
+    transform: translateY(-2px);
+}
+
+.error {
+    color: #c46247; /* Vermelho mais suave e desbotado para erros */
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+
+/* Estilos para o Conteúdo Principal (Calendário) */
+#main-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative; /* Para garantir que o z-index funcione bem com os corações */
+    z-index: 0; /* Abaixo dos corações (que estão em z-index -1) */
+}
+
+#container {
+    background: #fdfaf3;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 950px;
+    box-sizing: border-box;
+    margin-top: 30px;
+    border: 2px solid #cdb898; /* Borda para o efeito de papel, nostálgica */
+    position: relative;
+}
+
+.paper-effect::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 5px solid #fff;
+    border-radius: 18px;
+    z-index: -1;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+
+header h1 {
+    font-family: 'Gochi Hand', cursive;
+    color: #7d5a6b;
+    font-size: 3.5em;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.subtitle {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.3em;
+    color: #6a5a51;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+#calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    background-color: #e3d2bf; /* Fundo mais quente e suave para navegação */
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    border: 1px dashed #c2a893; /* Borda tracejada, nostálgica */
+}
+
+#current-month-year {
+    font-family: 'Gochi Hand', cursive;
+    color: #7d5a6b;
+    font-size: 2.2em;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.nav-button {
+    background-color: #8f6c7c;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-button:hover {
+    background-color: #7d5a6b;
+    transform: translateY(-2px);
+}
+
+#calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    border: 1px solid #c2a893;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #fff9ed; /* Mais claro e suave */
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+.day-name {
+    text-align: center;
+    font-family: 'Gochi Hand', cursive;
+    color: #7d5a6b;
+    font-size: 1.1em;
+    padding: 10px 0;
+    border-bottom: 2px dashed #c2a893;
+    margin-bottom: 0;
+    background-color: #e8dccb; /* Fundo levemente diferente para o cabeçalho dos dias */
+    border-radius: 5px 5px 0 0;
+    border-right: 1px solid #c2a893;
+    border-left: 1px solid #c2a893;
+    border-top: 1px solid #c2a893;
+    box-sizing: border-box;
+}
+
+.day-name:first-child { border-left: 1px solid #c2a893; }
+.day-name:last-child { border-right: 1px solid #c2a893; }
+.day-name + .day-name { border-left: none; }
+
+
+.calendar-day {
+    background-color: #fef8ec; /* Mais claro */
+    border: 1px solid #e3d2bf;
+    border-radius: 0;
+    padding: 15px 8px;
+    text-align: center;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+.calendar-day.empty {
+    background-color: #f6efe2; /* Vazio mais discreto */
+    border-color: #e8dccb;
+    cursor: default;
+    box-shadow: none;
+}
+
+.calendar-day:not(.empty):hover {
+    background-color: #f7e0bc; /* Hover mais quente */
+    transform: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    z-index: 1;
+}
+
+.day-number {
+    font-family: 'Gochi Hand', cursive;
+    font-size: 1.5em;
+    color: #7d5a6b;
+    margin-bottom: auto;
+    align-self: flex-start;
+    padding-left: 5px;
+}
+
+.has-memory {
+    background-color: #f0cc9f; /* Laranja/pêssego nostálgico */
+    border-color: #e0b48a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.has-memory::after {
+    content: '★';
+    font-family: 'Arial', sans-serif;
+    color: #bd7352; /* Cor da estrela mais suave */
+    font-size: 1.2em;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    left: auto;
+    transform: none;
+}
+
+.calendar-day {
+    border-top: none;
+    border-left: none;
+}
+
+.calendar-day:nth-child(7n+1) {
+    border-left: 1px solid #e3d2bf;
+}
+
+
+/* Detalhes da Memória - O "Caderno" */
+#memory-details {
+    background: #fffdf6;
+    border: 2px solid #cdb898;
+    border-radius: 15px;
+    padding: 40px 50px;
+    margin-top: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de pauta de caderno */
+#memory-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 70px;
+    width: 2px;
+    height: 100%;
+    background-color: #ff9999;
+    z-index: 0;
+}
+
+#memory-details::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(to bottom, #d9e3f0 0px, #d9e3f0 1px, transparent 1px, transparent 25px);
+    background-size: 100% 25px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+.notebook-page {
+    position: relative;
+    padding-left: 80px;
+    padding-right: 30px;
+}
+
+.notebook-page * {
+    position: relative;
+    z-index: 1;
+}
+
+.page-title {
+    font-family: 'Gochi Hand', cursive;
+    color: #7d5a6b;
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8f6c7c;
+}
+
+.memory-card-detail {
+    background: #fdfaf3;
+    border: none;
+    border-left: 5px solid #8f6c7c;
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+.memory-card-detail h4 {
+    font-family: 'Handlee', cursive;
+    margin-top: 0;
+    color: #5c4b82; /* Um tom de roxo mais suave e nostálgico para títulos de memória */
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.memory-card-detail p {
+    font-family: 'Handlee', cursive;
+    font-size: 1.1em;
+    color: #4a3e35;
+    margin-bottom: 12px;
+}
+
+.memory-card-detail span {
+    display: block;
+    text-align: right;
+    font-family: 'Indie Flower', cursive;
+    font-style: italic;
+    color: #6a5a51;
+    font-size: 0.9em;
+}
+/* ... (seu CSS existente) ... */
+
+.memory-card-detail p a {
+    color: #5c4b82; /* Pode ajustar para a cor que preferir */
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.memory-card-detail p a:hover {
+    color: #8f6c7c; /* Cor ao passar o mouse */
+}
+
+/* NOVO: Estilo para imagens dentro do conteúdo da memória */
+.memory-card-detail p img {
+    max-width: 100%; /* Garante que a imagem não saia do contêiner */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Garante que a imagem ocupe sua própria linha */
+    margin: 15px auto; /* Centraliza a imagem e adiciona espaço */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra suave */
+}
+.close-button {
+    margin-top: 30px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #7d5a6b;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: #6c4b5d;
+    transform: translateY(-2px);
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #8f8179;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Caderno de Memórias Antigas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Handlee&family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="heart-container"></div> <div id="access-screen" class="paper-card">
+        <h1>BEM VINDA MINHA PRINCESONAAAA</h1>
+        <p>Por favor, insira o código mágico:</p>
+        <input type="password" id="access-code-input" placeholder="Código Secreto">
+        <button id="submit-access-code">Abrir Caderno</button>
+        <p id="access-message" class="error"></p>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <div id="container" class="paper-effect">
+            <header>
+                <h1>O Nosso Caderno de Memórias</h1>
+                <p class="subtitle">Um tesouro de momentos especiais.</p>
+            </header>
+
+            <section id="calendar-navigation">
+                <button id="prev-month" class="nav-button">Mês Anterior</button>
+                <h2 id="current-month-year"></h2>
+                <button id="next-month" class="nav-button">Próximo Mês</button>
+            </section>
+
+            <section id="calendar-grid" class="calendar-paper-grid">
+                <div class="day-name">Dom</div>
+                <div class="day-name">Seg</div>
+                <div class="day-name">Ter</div>
+                <div class="day-name">Qua</div>
+                <div class="day-name">Qui</div>
+                <div class="day-name">Sex</div>
+                <div class="day-name">Sáb</div>
+            </section>
+
+            <section id="memory-details" class="hidden notebook-page">
+                <button id="close-details" class="close-button">Voltar ao Calendário</button>
+                <h3 id="memory-date-display" class="page-title"></h3>
+                <div id="memories-for-day-container" class="page-content">
+                    </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2025 Nosso Caderno de Memórias</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
