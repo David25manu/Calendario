@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // MENSAGEM PADRÃO PARA TODOS OS MESES
             let conteudo = "O PRESENTE QUE SEU NENEMZINHO TE DEU NESSE MES FOI:";
             
-            // NOVO: Adiciona a mensagem detalhada e o pedido de noivado para o 1º mês (Janeiro)
+            // Adiciona a mensagem detalhada e o pedido de noivado para o 1º mês (Janeiro)
             if (monthCount === 1) {
                 conteudo += `
                     <br>OI MINHA PRINCESINHA LINDAAAAAAAAAAAAAAAAAAAAA HOJE NOS FAZ NOSSO PRIMEIRO MÊS DE NAMORO HOJEEEEEEE💅🏻💅🏻😍😍😍😍😍😍😍 HEHEHEHEHE FOI INCRIVEL ESSE MES JUNTOS MINHA TOTOSINHA ATE ENT SÓ SUBINDO MEU AMOR POR VOXE E VAI CONTINUAR ASSIM PARA TODA ETERNIDADE MINHA COELHINHAAAA ❤🐰<br>
@@ -141,10 +141,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // Adiciona a imagem no conteúdo se for o 3º mês
             else if (monthCount === 3) {
+                // *** CORRIGIDO: O caminho da imagem agora é apenas "3mes.jpg" ***
                 conteudo = `
                     <p>${conteudo}</p>
                     <img src="3mes.jpg" alt="Nossa foto de 3 meses" style="max-width: 100%; height: auto; display: block; margin: 15px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 `;
+            }
+            // Adiciona o link para o 4º mês (Abril)
+            else if (monthCount === 4) {
+                const linkUrl = "https://david25manu.github.io/Chuva-de-amor-hehe/";
+                conteudo = `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer">${conteudo}</a>`;
             }
             // Adiciona o link ao conteúdo se for o 5º mês
             else if (monthCount === 5) {
