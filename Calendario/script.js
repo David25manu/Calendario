@@ -101,10 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 titulo = `NOSSO ${monthCount}º MÊS JUNTINHOSSS`; 
             }
 
-            // MENSAGEM PADRÃO PARA TODOS OS MESES
             let conteudo = "O PRESENTE QUE SEU NENEMZINHO TE DEU NESSE MES FOI:";
             
-            // NOVO: Adiciona a mensagem detalhada e o pedido de noivado para o 1º mês (Janeiro)
             if (monthCount === 1) {
                 conteudo += `
                     <br>OI MINHA PRINCESINHA LINDAAAAAAAAAAAAAAAAAAAAA HOJE NOS FAZ NOSSO PRIMEIRO MÊS DE NAMORO HOJEEEEEEE💅🏻💅🏻😍😍😍😍😍😍😍 HEHEHEHEHE FOI INCRIVEL ESSE MES JUNTOS MINHA TOTOSINHA ATE ENT SÓ SUBINDO MEU AMOR POR VOXE E VAI CONTINUAR ASSIM PARA TODA ETERNIDADE MINHA COELHINHAAAA ❤🐰<br>
@@ -119,9 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     EU TE AMO MAIS QUE TUDOOOOOOOO MINHA TOTOSINHA MINHA GULOSA MINHA COELHINHA MINHA TUDINHO<br><br>
                     <strong>Bonus:</strong> "Nenem voce é a mulher mais linda e mais perfeita q ja vi na minha vida por dentro e por fora então eu queria perguntar se voxe quer virar minha noiva 👉🏻👈🏻🥺"
                 `;
-            }
-            // Adiciona a mensagem detalhada para o 2º mês (Fevereiro)
-            else if (monthCount === 2) {
+            } else if (monthCount === 2) {
                 conteudo += `
                     ____________________________<br>
                     OIIIIIIIIIIIIIII MINHAAAAAAAA PRINCESINHAAAAAAAAAAAAAAAAA<br>
@@ -138,33 +134,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     É ISSO BEBEZINHAAAAAAAAA BEJU GRANDAO DO SEU NENEMZINHA<br>
                     ---------------------------------
                 `;
-            }
-            // Adiciona a imagem no conteúdo se for o 3º mês
-            else if (monthCount === 3) {
+            } else if (monthCount === 3) {
                 conteudo = `
                     <p>${conteudo}</p>
                     <img src="3mes.jpg" alt="Nossa foto de 3 meses" style="max-width: 100%; height: auto; display: block; margin: 15px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 `;
-            }
-            // Adiciona o link ao conteúdo se for o 5º mês
-            else if (monthCount === 5) {
+            } else if (monthCount === 5) {
                 const linkUrl = "https://david25manu.github.io/amor-crescente/";
-                conteudo = `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer">${conteudo}</a>`;
-            } 
-            // Adiciona o link ao conteúdo se for o 6º mês
-            else if (monthCount === 6) {
+                conteudo = `${conteudo} <a href="${linkUrl}" target="_blank" rel="noopener noreferrer">CLIQUE AQUI PRA VER O PRESENTE DO 5º MÊS!</a>`;
+            } else if (monthCount === 6) {
                 const linkUrl = "https://david25manu.github.io/7meses/";
-                conteudo = `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer">${conteudo}</a>`;
-            }
-            // Adiciona a frase específica para o 7º mês (Julho)
-            else if (monthCount === 7) {
+                conteudo = `${conteudo} <a href="${linkUrl}" target="_blank" rel="noopener noreferrer">CLIQUE AQUI PRA VER O PRESENTE DO 6º MÊS!</a>`;
+            } else if (monthCount === 7) {
                 conteudo += " ESSE CALENDARIO LINDO AQUI COM TODAS AS MEMORIAS E TODOS PRESENTES HEHEHEHE";
+            }
+            
+            // NOVO CÓDIGO PARA O MÊS 8 (AGOSTO DE 2025)
+            else if (monthCount === 8) {
+                const linkUrl = "https://david25manu.github.io/8mesinhosssss/";
+                conteudo = `O PRESENTE DO SEU NENECO NOS 8 MES HEHEH <a href="${linkUrl}" target="_blank" rel="noopener noreferrer">CLIQUE AQUI!</a>`;
             }
 
             progressiveMemories.push({
                 data: dataString,
                 titulo: titulo,
-                conteudo: conteudo, // Usa o conteúdo que pode conter a imagem, o link ou a mensagem detalhada
+                conteudo: conteudo,
                 autor: "Nos"
             });
 
